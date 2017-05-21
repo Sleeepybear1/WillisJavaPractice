@@ -36,14 +36,15 @@ public class ArrayList {
 		
 		while(current.next != null){
 			if(current.next.getIndex() == index){
+				Node temp = current.next.next;
 				current.next = new Node(data, index);
-				this.size++;
+				current.next.next = temp;
 				return;
 			}else if(current.next.getIndex() > index){
 				//do insert
 				Node temp = current.next;
-				current = new Node(data,index);
-				current.next = temp;
+				current.next = new Node(data,index);
+				current.next.next = temp;
 				this.size++;
 				return;
 				//I think there's a mistake here where I'm deleting the current value when I shouldn't be. 
@@ -52,6 +53,9 @@ public class ArrayList {
 				current = current.next;
 			}
 			
+		}
+		if (current.next == null){
+			current.next = new Node(data,index);
 		}
 		
 	}
