@@ -1,5 +1,23 @@
 
-
+/* Public class ArrayList
+ * 
+ * written by Gehn 
+ * 
+ * Makes an array with the underlying structure of a linked list.
+ * 
+ * Methods:
+ * 
+ * addValue(data,index): Adds a node
+ * 
+ * removeAtIndex(index): Removes value at index.
+ * 
+ * removeValue(value): Removes first instance of the input value from array
+ * 
+ * hasValue(value): boolean. Checks if array has value or not
+ * 
+ * getSize(): Returns number of elements in array
+ * 
+ * */
 
 public class ArrayList {
 	Node head;
@@ -35,6 +53,12 @@ public class ArrayList {
 		Node current = head;
 		
 		while(current.next != null){
+			if(current.getIndex()==index){
+				Node temp = current.next;
+				current = new Node(data, index);
+				current.next = temp;
+				return;
+			}
 			if(current.next.getIndex() == index){
 				Node temp = current.next.next;
 				current.next = new Node(data, index);
@@ -77,10 +101,12 @@ public class ArrayList {
 		    if (head.index == index){
 		        head = head.next;
 		        this.size--;
+		        System.out.println("Removed at Index:" + index);
 		    }
 		    if(head.next.index == index){
 		    	head.next = head.next.next;
 		    	this.size--;
+		    	System.out.println("Removed at Index:" + index);
 		    	return;
 		    }
 		Node current = head;
@@ -88,6 +114,7 @@ public class ArrayList {
 			if(current.next.index == index){
     			current.next = current.next.next;
     			this.size--;
+    			System.out.println("Removed at Index:" + index);
     			return;    
 			}
 			current = current.next;
@@ -129,12 +156,15 @@ public class ArrayList {
 	    if (head.data == value){
 	        head = head.next;
 	        this.size--;
+	        System.out.println("Removed value of: " + value + "!");
+	        return;
 	    }
 	    Node current = head;
 	    while (current.next != null){
 	        if(current.next.data == value){
 	            current.next = current.next.next;
 	            this.size--;
+	            System.out.println("Removed Value of: " +value + "!");
 	            return;
 	        }
 	        current = current.next;
@@ -147,28 +177,55 @@ public class ArrayList {
 	public int getSize(){
 		return this.size;
 	}
+	
+	public void printList(){
+		Node current = head;
+		if (current == null){
+			System.out.println("Empty Array");
+			return;
+		}
+		if (head.next == null){
+			System.out.println(current.data + " , " + current.index);
+			System.out.println("Current size is:" + this.getSize());
+			return;
+		}
+		while (current.next != null){
+			System.out.println(current.data + " , " + current.index);
+			current = current.next;
+		}
+		System.out.println("Current size is:" + this.getSize());
+		return;
+	}
 	public static void main(String[] args) {
 		//  Auto-generated method stub
     System.out.println("If this prints the code compiles!");
     ArrayList trial = new ArrayList();
-    System.out.println(trial.getSize());
-    trial.addValue(25, 20);
-    System.out.println(trial.getSize());
-    trial.addValue(10, 1);
-    trial.addValue(10, 1);
-    System.out.println(trial.getSize());
+    trial.printList();
+    trial.addValue(2, 1);
+    trial.printList();
+    trial.addValue(10, 11);
+    trial.printList();
+    trial.addValue(10, 2);
+    trial.printList();
 
     trial.addValue(10, 1);
-    System.out.println(trial.getSize());
+    trial.printList();
 
-    trial.addValue(11, 1);
-    System.out.println(trial.getSize());
+    trial.addValue(11, 4);
+    trial.printList();
 
-    trial.addValue(9,20);
+    trial.addValue(9,3);
     trial.addValue(2, 5);
     
     System.out.println(trial.hasValue(10));
-    System.out.println(trial.getSize());
+    if (trial.hasValue(10)){
+    	trial.removeValue(10);
+    }
+    trial.printList();
+    trial.removeAtIndex(5);
+    trial.printList();
+    trial.addValue(7642, 2);
+    trial.printList();
 	}
 	
 
