@@ -51,6 +51,16 @@ public class ArrayList {
 			}
 		}
 		Node current = head;
+		if (current.index > index){
+			this.prepend(data,index);
+			return;
+		}
+		if (current.next.index == index) {
+			Node temp = current.next;
+			current = new Node(data, index);
+			current.next = temp;
+			return;
+		}
 		
 		while(current.next != null){
 			if(current.getIndex()==index){
@@ -189,7 +199,7 @@ public class ArrayList {
 			System.out.println("Current size is:" + this.getSize());
 			return;
 		}
-		while (current.next != null){
+		while (current != null){
 			System.out.println(current.data + " , " + current.index);
 			current = current.next;
 		}
@@ -201,9 +211,10 @@ public class ArrayList {
     System.out.println("If this prints the code compiles!");
     ArrayList trial = new ArrayList();
     trial.printList();
-    trial.addValue(2, 1);
+    trial.addValue(2, 120);
     trial.printList();
     trial.addValue(10, 11);
+    System.out.println(trial.hasValue(10));
     trial.printList();
     trial.addValue(10, 2);
     trial.printList();
@@ -225,6 +236,10 @@ public class ArrayList {
     trial.removeAtIndex(5);
     trial.printList();
     trial.addValue(7642, 2);
+    trial.printList();
+    trial.addValue(50, 4);
+    trial.printList();
+    trial.addValue(15, 1);
     trial.printList();
 	}
 	
